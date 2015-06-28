@@ -1,9 +1,13 @@
 FROM python:2.7
+
 MAINTAINER Ignacio Torres Masdeu <i@itorres.net>
 
-# Mimics 2-onbuild except for the inclusion of ldap libraries
+# Mimics 2-onbuild except for the inclusion of LDAP development libraries
 
-RUN apt-get update && apt-get install python-ldap
+COPY certs/* /usr/local/share/ca-certificates/
+RUN apt-get update && apt-get install -y libldap2-dev libsasl2-dev && /usr/sbin/update-ca-certificates
+
+COPY ldap.conf /etc/ldap/ldap.conf
 
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app

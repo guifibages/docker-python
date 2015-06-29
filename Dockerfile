@@ -1,13 +1,16 @@
-FROM python:2.7
+FROM python:3
 
 MAINTAINER Ignacio Torres Masdeu <i@itorres.net>
 
-# Mimics 2-onbuild except for the inclusion of LDAP development libraries
-
-COPY certs/* /usr/local/share/ca-certificates/
-RUN apt-get update && apt-get install -y libldap2-dev libsasl2-dev && /usr/sbin/update-ca-certificates
+# Mimics 3-onbuild except for the inclusion of ldap configuration and packages
 
 COPY ldap.conf /etc/ldap/ldap.conf
+COPY certs/* /usr/local/share/ca-certificates/
+RUN /usr/sbin/update-ca-certificates
+
+RUN apt-get update && \
+    apt-get install -y libldap2-dev libsasl2-dev nmap mtr traceroute
+
 
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app

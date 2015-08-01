@@ -2,7 +2,7 @@ FROM python:3
 
 MAINTAINER Ignacio Torres Masdeu <i@itorres.net>
 
-# Mimics 3-onbuild except for the inclusion of ldap configuration and packages
+# Mimics python:3-onbuild except for the inclusion of ldap configuration and network tools
 
 COPY ldap.conf /etc/ldap/ldap.conf
 COPY certs/* /usr/local/share/ca-certificates/

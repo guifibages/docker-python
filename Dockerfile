@@ -9,7 +9,7 @@ COPY certs/* /usr/local/share/ca-certificates/
 RUN /usr/sbin/update-ca-certificates
 
 RUN apt-get update && \
-    apt-get install -y libldap2-dev libsasl2-dev nmap mtr traceroute
+    apt-get install -y libldap2-dev libsasl2-dev mtr-tiny traceroute
 
 
 RUN mkdir -p /usr/src/app
